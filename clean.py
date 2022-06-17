@@ -5,6 +5,7 @@ import time
 import hashlib
 import os 
 import os.path
+import sys
 
 async def discord_login(username, password):
 	cache_name = f'cache_{hashlib.sha1((username + password).encode("utf8")).hexdigest()}.dat'
@@ -47,7 +48,7 @@ async def on_ready():
 						print(member)
 						if permissions.kick_members:
 							await member.kick()
-							
+
 			async for message in channel.history(limit=None):
 				if not permissions.manage_messages and message.author != client.user: continue
 				print("> ", message.content, " "*20, end="\r")
